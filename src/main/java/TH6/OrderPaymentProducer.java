@@ -16,6 +16,7 @@ public class OrderPaymentProducer {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env=StreamContextEnvironment.getExecutionEnvironment();
         DataStream<String> messageStream = env.addSource(new OrderPaymentGenerator());
+        messageStream.print();
         messageStream.addSink(new FlinkKafkaProducer<String>("10.1.12.183:9092",
                 "OrderPayment_Chien188210",
                 new SimpleStringSchema()));

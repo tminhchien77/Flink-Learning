@@ -13,7 +13,8 @@ public class Tokenizer implements FlatMapFunction<String, MessageModel> {
     public void flatMap(String value, Collector<MessageModel> out) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-
+            System.out.println("value");
+            System.out.println(value);
             List<MessageModel> serviceModels = Arrays.asList(mapper.readValue(value, MessageModel[].class));
 
             for (MessageModel item: serviceModels) {

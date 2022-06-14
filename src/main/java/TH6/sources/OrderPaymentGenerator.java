@@ -11,9 +11,9 @@ public class OrderPaymentGenerator implements SourceFunction<String> {
     @Override
     public void run(SourceContext<String> sourceContext) throws Exception {
         while(running) {
-            OrderPayment orderPayment=new OrderPayment(randomString() ,randomNumber(), randomNumber(), randomString(), randomPaymentType(), Instant.now().toEpochMilli(), randomAmount());
+            OrderPayment orderPayment=new OrderPayment(randomString() ,CustomerId(), randomNumber(), randomString(), randomPaymentType(), Instant.now().toEpochMilli(), randomAmount());
             sourceContext.collect(orderPayment.toString());
-            Thread.sleep(500);
+            Thread.sleep(1000);
         }
     }
 
@@ -37,6 +37,10 @@ public class OrderPaymentGenerator implements SourceFunction<String> {
     }
     private float randomAmount(){
         Random rnd=new Random();
-        return rnd.nextInt(2000000000)+ rnd.nextFloat();
+        return rnd.nextInt(200000)+ rnd.nextFloat();
+    }
+    private int CustomerId(){
+        Random rnd=new Random();
+        return rnd.nextInt(10-1)+1;
     }
 }

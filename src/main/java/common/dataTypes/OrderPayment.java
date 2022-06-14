@@ -10,18 +10,30 @@ public class OrderPayment {
     public int customerId;
     public int brandId;
     public String saleOrderId;
-    public int paymentType;
+    public int payableType;
     public int transactionTypeId;
     public long payTime;
     public float totalAmount;
+    public OrderPayment(){
 
-    public OrderPayment(String id, int customerId, int brandId, String saleOrderId, int paymentType, long payTime, float totalAmount){
+    };
+    public OrderPayment(String id, int customerId, int brandId, String saleOrderId, int payableType, int transactionTypeId, long payTime, float totalAmount){
         this.id=id;
         this.customerId=customerId;
         this.brandId=brandId;
         this.saleOrderId=saleOrderId;
-        this.paymentType=paymentType;
-        if(this.paymentType==1){
+        this.payableType=payableType;
+        this.transactionTypeId=transactionTypeId;
+        this.payTime=payTime;
+        this.totalAmount=totalAmount;
+    }
+    public OrderPayment(String id, int customerId, int brandId, String saleOrderId, int payableType, long payTime, float totalAmount){
+        this.id=id;
+        this.customerId=customerId;
+        this.brandId=brandId;
+        this.saleOrderId=saleOrderId;
+        this.payableType=payableType;
+        if(this.payableType==1){
             Random rnd=new Random();
             this.transactionTypeId=rnd.nextInt(2000000000);
         }
@@ -33,7 +45,8 @@ public class OrderPayment {
     public String toString() {
         ObjectMapper objectMapper=new ObjectMapper();
         try {
-            return objectMapper.writeValueAsString(this);
+            String result="["+objectMapper.writeValueAsString(this)+"]";
+            return result;
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
