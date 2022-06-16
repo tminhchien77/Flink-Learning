@@ -1,5 +1,6 @@
 package common.dataTypes;
 
+import java.io.Serializable;
 import java.util.Random;
 
 public class CustomerPayment {
@@ -10,7 +11,7 @@ public class CustomerPayment {
     public int transactionTypeId;
     public int useTime;
     public float totalAmount;
-
+    public CustomerPayment(){};
     public CustomerPayment(int customerId, int brandId, int payableType, int transactionTypeId, int useTime, float totalAmount){
         this.customerPaymentId=CustomerPaymentId();
         this.customerId=customerId;
